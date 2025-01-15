@@ -56,6 +56,10 @@ sum(dados_2019$University_industry_collaboration < 26.4)
 # Recodificação variáveis categóricas
 str(dados_2019)
 # na coluna "continent" irei trocar o nome "Asia" por "Asia_1"
+dados_2019$continent [dados_2019$continent == "Asia"] <- "Asia_1"  # Substituir "Asia" por "Asia_1"
+str(dados_2019) # para verificar a mudança
+
+# 1.4 - Tabelas  de  frequência
 
 
-recodificação  de  variáveis,  tabelas  de  frequência,  resultados  descritivos (média, mediana, desvio e CV), cruzamentose gráficos diversos
+,  resultados  descritivos (média, mediana, desvio e CV), cruzamentose gráficos diversos
