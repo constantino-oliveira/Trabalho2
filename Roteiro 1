@@ -47,14 +47,14 @@ summary (dados_2019$University_industry_collaboration) # para verificar se os NA
 
 # 1.3 - Recodificação  de  variáveis
 # Recodificação variáveis numéricas
-sum(dados_2019$University_industry_collaboration < 26.4)
-# A resposta foi "[1] 4" quatro vezes
+sum(dados_2019$University_industry_collaboration < 26.4) # Verifiquei quantos núemros existem menor que 26.4
+# A resposta foi "[1] 4" quatro 
 dados_2019$University_industry_collaboration[dados_2019$University_industry_collaboration < 26.4] <- 26.4  # Substituir valores menores que 26,4 por 26,4
 sum(dados_2019$University_industry_collaboration < 26.4)
 # A resposta foi "[1] 0". Ou seja, os valores foram substituidos
 
 # Recodificação variáveis categóricas
-str(dados_2019)
+str(dados_2019) # para verificar tadas as variáveis da tabela
 # na coluna "continent" irei trocar o nome "Asia" por "Asia_1"
 dados_2019$continent [dados_2019$continent == "Asia"] <- "Asia_1"  # Substituir "Asia" por "Asia_1"
 str(dados_2019) # para verificar a mudança
