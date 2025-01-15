@@ -1,1 +1,10 @@
-Roteiro 1
+# PREPARAÇÃO DO R # 
+install.packages("tidyverse") # instalaçao do pacote "tidyverse"
+library(tidyverse) # permissão para uso das funções do pacote "tidyverse"
+
+# UPLOAD DA BASE DE DADOS #
+# Arquivo "Global Innovation Index" (2018, 2019 e 2020) --> https://www.globalinnovationindex.org/analysis-indicator --> Base_Trabalho2.csv
+# link: https://www.dropbox.com/scl/fo/li8fsggxke7av76rrfy0w/AHege-b6jJKUVk57zQ21iuA?rlkey=8dnfpp7ahej98tx4111ji5rdf&st=36xjfn43&dl=0
+dados <- read_csv("C:/Users/const/Desktop/Base_Trabalho2.csv")
+dados <- read_delim("C:/Users/const/Desktop/Base_Trabalho2.csv", delim = ";")
+
