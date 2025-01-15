@@ -8,3 +8,14 @@ library(tidyverse) # permissão para uso das funções do pacote "tidyverse"
 dados <- read_csv("C:/Users/const/Desktop/Base_Trabalho2.csv")
 dados <- read_delim("C:/Users/const/Desktop/Base_Trabalho2.csv", delim = ";")
 
+# 4º ROTEIRO - PROPENSITY SCORE MATCHING (PSM) #
+
+# 4.1 - Hipoteses #
+# Se pretende verificar se quanto quando a uma maior facilidade para conseguir crédito em um país (Ease_getting_credit) isso torna o país com um melhor ambiente para negócios (Business_environment)
+# A hipótese núla (H0) é que quanto mais fácil conseguir crédito não impacta positivamente em um melhor ambiente de negócios no país.
+# A hipótese 1 (H1) é que quanto mais fácil conseguir crédito impacta positivamente em um melhor ambiente de negócios no país.
+Passo-a-passoda   análise,   com   descrição   detalhada   do   caso investigado, as decisões de análise e a conclusão pelo teste de hipóteses.
+dados_2020 <- subset(dados, year == 2020) # São três anos, irei apenas utilizar os dados de 2020
+boxplot(dados_2020$Human_capital_and_research, main = "Boxplot da Variável", horizontal = TRUE) # Utilizareio o bloxplot para verificar outliers na coluna "Human_capital_and_research"
+# Irei identificar os outliers com base no intervalo interquartil (IQR)
+# Calculo limites para uma var
