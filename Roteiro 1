@@ -45,9 +45,17 @@ summary (dados_sem_na) # para verificar se os NA se mantem. Nesse caso, não for
 dados_2019$University_industry_collaboration[is.na(dados_2019$University_industry_collaboration)] <- median(dados_2019$University_industry_collaboration, na.rm = TRUE)
 summary (dados_2019$University_industry_collaboration) # para verificar se os NA se mantem. Nesse caso, não foram mais encontrados os NAs
 
-git commit
-
-
 # 1.3 - Recodificação  de  variáveis
+# Recodificação variáveis numéricas
+sum(dados_2019$University_industry_collaboration < 26.4)
+# A resposta foi "[1] 4" quatro vezes
+dados_2019$University_industry_collaboration[dados_2019$University_industry_collaboration < 26.4] <- 26.4  # Substituir valores menores que 26,4 por 26,4
+sum(dados_2019$University_industry_collaboration < 26.4)
+# A resposta foi "[1] 0". Ou seja, os valores foram substituidos
+
+# Recodificação variáveis categóricas
+str(dados_2019)
+# na coluna "continent" irei trocar o nome "Asia" por "Asia_1"
+
 
 recodificação  de  variáveis,  tabelas  de  frequência,  resultados  descritivos (média, mediana, desvio e CV), cruzamentose gráficos diversos
