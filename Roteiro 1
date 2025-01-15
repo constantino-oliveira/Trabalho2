@@ -1,0 +1,53 @@
+# PREPARAÇÃO DO R # 
+install.packages("tidyverse") # instalaçao do pacote "tidyverse"
+library(tidyverse) # permissão para uso das funções do pacote "tidyverse"
+
+# UPLOAD DA BASE DE DADOS #
+# Arquivo "Global Innovation Index" (2018, 2019 e 2020) --> https://www.globalinnovationindex.org/analysis-indicator --> Base_Trabalho2.csv
+# link: https://www.dropbox.com/scl/fo/li8fsggxke7av76rrfy0w/AHege-b6jJKUVk57zQ21iuA?rlkey=8dnfpp7ahej98tx4111ji5rdf&st=36xjfn43&dl=0
+dados <- read_csv("C:/Users/const/Desktop/Base_Trabalho2.csv")
+dados <- read_delim("C:/Users/const/Desktop/Base_Trabalho2.csv", delim = ";")
+
+# 1º ROTEIRO - EXPLORAÇÃO DE DADOS #
+
+# 1.1 - Tratamento de outliers #
+dados_2020 <- subset(dados, year == 2020) # São três anos, irei apenas utilizar os dados de 2020
+boxplot(dados_2020$Human_capital_and_research, main = "Boxplot da Variável", horizontal = TRUE) # Utilizareio o bloxplot para verificar outliers na coluna "Human_capital_and_research"
+# Irei identificar os outliers com base no intervalo interquartil (IQR)
+# Calculo limites para uma variável:
+Q1 <- quantile(dados_2020$Human_capital_and_research, 0.25, na.rm = TRUE) 
+Q3 <- quantile(dados_2020$Human_capital_and_research, 0.75, na.rm = TRUE)
+IQR <- Q3 - Q1
+# Limites inferior e superior:
+limite_inferior <- Q1 - 1.5 * IQR
+limite_superior <- Q3 + 1.5 * IQR
+# Identificar outliers
+outliers <- dados_2020[dados_2020$Human_capital_and_research < limite_inferior | dados_2020$Human_capital_and_research > limite_superior, ]
+summary (outliers) # para visualizar
+# Não houve outliers, mas se houvesse, haveriam duas possibilidades de tratamento:
+# Opção 1 - Remover os Outliers:
+dados_2020_sem_outliers <- dados_2020[dados_2020$Human_capital_and_research >= limite_inferior & dados_2020$Human_capital_and_research <= limite_superior, ]
+# Opção 2 - substituir os outliers por valores como a mediana (ou média):
+dados_2020$Human_capital_and_research [dados_2020$Human_capital_and_research < limite_inferior | dados_2020$Human_capital_and_research > limite_superior] <-  median(dados_2020$Human_capital_and_research, na.rm = TRUE)
+
+# 1.2 - Tratamento de dados ausentes #
+# usarei a coluna "University_industry_collaboration" e o ano de 2019 pois sei que existem dados ausentes
+dados_2019 <- subset(dados, year == 2019)
+any(is.na(dados_2019$University_industry_collaboration)) # para verificar se há dados ausentes
+# A resposta foi "[1] TRUE", ou seja, há dados ausentes
+summary(dados_2019$University_industry_collaboration) # para verificar o sumário com o dados ausentes
+# A resposta foi de 4 dados ausentes (NA's = 4)
+# Há duas possibilidades de tratamento:
+# Opção 1 - Remover linhas com NAs:
+dados_sem_na <- na.omit(dados_2019$University_industry_collaboration)
+summary (dados_sem_na) # para verificar se os NA se mantem. Nesse caso, não foram mais encontrados os NAs
+# Opção 2 - Substituir por mediana (ou a média)
+dados_2019$University_industry_collaboration[is.na(dados_2019$University_industry_collaboration)] <- median(dados_2019$University_industry_collaboration, na.rm = TRUE)
+summary (dados_2019$University_industry_collaboration) # para verificar se os NA se mantem. Nesse caso, não foram mais encontrados os NAs
+
+git commit
+
+
+# 1.3 - Recodificação  de  variáveis
+
+recodificação  de  variáveis,  tabelas  de  frequência,  resultados  descritivos (média, mediana, desvio e CV), cruzamentose gráficos diversos
